@@ -1,0 +1,16 @@
+typedef struct fila Fila;
+
+Fila* fila_cria (void);
+
+void fila_insere (Fila* f, int v);
+int fila_retira (Fila* f);
+
+int fila_vazia (Fila* f);
+void fila_libera (Fila* f);
+int fila_tamanho (Fila* f);
+void imprime (Fila * f);
+void imprime2 (Fila * f);
+Fila * separaPares (Fila * f);
+
+
+

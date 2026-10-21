@@ -1,0 +1,246 @@
+/*
+
+No* busca_lst_circular(No* lista, int v){
+    No* p = lista;
+
+    if(p){
+        do{
+            if(p->info == v){
+                return p;
+            }
+
+            p = p->prox;
+
+        }while(p != lista);
+    }
+
+    printf("Não encontrado\n");
+    return NULL;
+}
+
+void remocao_lst_circular(No** lista, int v){
+    No* p = *lista;
+    ant = NULL;
+
+    if(p){
+        do{
+            if(p->info == v){
+                if(p == *lista){
+                    *lista = p->prox;
+                }
+                else{
+                    ant->prox = p->prox;
+                }
+                free(p);
+                return;
+            }
+            ant = p;
+            p = p->prox;
+        }while(p != *lista)
+
+    }
+}
+
+void lst_retira(No** inicio, int v){
+    No* p = *inicio;
+    No* ant = NULL;
+
+    while(p != NULL && p->info != v){
+        ant = p;
+        p = p->prox;
+    }
+
+    if(p == NULL){
+        printf("Elemento nao encontrado");
+        return;
+    }
+
+    if(ant == NULL){              // primeiro elemento
+        *inicio = p->prox;
+
+        if(*inicio != NULL)
+            (*inicio)->ant = NULL;
+
+        free(p);
+        return;
+    }
+
+    if(p->prox == NULL){        // ultimo elemento
+        ant->prox = NULL;
+        free(p);
+        return;
+    }
+
+    // elemento do meio
+    ant->prox = p->prox;
+    p->prox->ant = ant;
+
+    free(p);
+}
+
+
+
+
+Lista* encontra_invalidos(Lista* lista){
+    No* ant=lista->ini;
+    No* p = ant->prox;
+    Lista* invalidos = (Lista*)malloc(sizeof(Lista));
+    
+    invalidos->ini = NULL;
+    
+    while(p!=NULL){
+
+        if(p->prox->info != (p->info + ant->info)){
+            No* add = (No*)malloc(sizeof(No));
+            if(invalidos->ini = NULL){
+                add->prox = invalidos->ini;
+                invalidos->ini = add;
+            }
+            add->info = p->prox->info;
+
+        }
+    }
+}
+
+bool caca_palavra(char** matriz, int n, int m, char* palavra)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            int k = 0;
+
+            while (palavra[k] != '\0' &&
+                   j + k < m &&
+                   matriz[i][j + k] == palavra[k])
+            {
+                k++;
+            }
+
+            if (palavra[k] == '\0')
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+Int invertelista(Lista* L){
+    int cont = 0;
+    No* p1 = L->ini;
+    No* p2 = L->fim;
+    while(p1 != p2 && p1->ant != p2){
+        if(p1->valor == p2->valor){
+            cont++;
+        }
+        else{
+            int aux;
+            aux=p1->valor;
+            p1->valor=p2->valor;
+            p2->valor = aux;
+        }
+        p1=p1->prox;
+        p2=p2->ant;
+    }
+    return cont;
+}
+
+bool embaralha(Leque* leque){
+    Leque* Novo=(Leque*)malloc(sizeof(Leque));
+    Novo->topo = NULL;
+    int xcont=0;
+    while(!LequeVazio(leque)){
+        empilha(Novo, desempilha(leque));
+        cont++;
+    }
+    if(cont%2 != 0){
+        while(!LequeVazio(Novo)){
+            empilha(leque, desempilha(Novo));
+        }
+        return false;
+    }
+    else{
+        int aux=1;
+        Leque* SegundaM=(Leque*)malloc(sizeof(Leque));
+        Segundam->topo=NULL;
+        Leque* PrimeiraM=(Leque*)malloc(sizeof(Leque));
+        PrimeiraM->topo=NULL;
+        while(aux<=cont/2){
+            empilha(SegundaM, desempilha(Novo));]
+            aux++;
+        }
+        while(aux<=cont){
+            empilha(PrimeiraM, desempilha(Novo));
+            aux++;
+        }
+        while(!LequeVazio(SegundaM)){
+            empilha(Novo, desempilha(PrimeiraM));
+            empilha(Novo, desempilha(SegundaM));
+        }
+        while(!LequeVazio(Novo)){
+            empilha(leque, desempilha(Novo));
+        }
+        return true;
+    }
+}   
+
+Lista* encontra_invalidos(Lista* lista){
+    No* ant = lista->ini;
+    No* p = lista->ini->prox;
+    Lista* invalidos = (Lista*)malloc(sizeof(Lista));
+    invalidos->ini = NULL;
+    while(p->prox != NULL){
+        if((p->info+ant->info) != p->prox->info){
+            No* inv=(No*)malloc(sizeof(No));
+            inv->prox=invalidos->ini;
+            invalidos->ini = inv;
+            inv->info = p->prox->info;
+            No* aux = p->prox;
+            p->prox = aux->prox;
+            free(aux);
+        }
+        else{
+        ant->prox = p;
+        p=p->prox;
+        }
+    }
+    return invalidos;
+}
+
+void escalona_tarefas(Lista* l){
+    No* ant = NULL;
+    No* p = l->ini;
+    while(p->prox != l->ini){
+        p=p->prox;
+    }
+    ant = p;
+    p=p->prox;
+    if(p){
+        while(l->ini != NULL)){
+            int j=1;
+            do{
+                if(p->valor <=5){
+                    printf("A%d %dh", j, p->valor);
+                    printf("A%d encerrou", j);
+                    No* aux = p;
+                    if(p == l->ini){
+                        l->ini = p->prox;
+                    }
+                    p=p->prox;
+                    ant->prox = p;
+                    free(aux);
+                }
+                else{
+                    printf("A%d %dh", j, 5);
+                    p->valor = p->valor - 5;
+                    ant = p;
+                    p=p->prox;
+                }
+                j++;
+    }   
+    }
+}
+
+*/

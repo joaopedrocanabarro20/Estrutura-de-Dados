@@ -5,7 +5,7 @@
 #define NUM_VERTICES 10
 
 
-/*composição de um grafo*/
+/*composiï¿½ï¿½o de um grafo*/
 struct grafo{
     int matriz[NUM_VERTICES][NUM_VERTICES];
 };
@@ -37,9 +37,29 @@ int grafo_qtd_vertices (Grafo * grafo){
 
 
 
+int *grafo_busca_vertices_saida(Grafo *grafo, int vertice, int *cont)
+{
+    int i = 0;
+    int num_vertices = 0;
 
-int * grafo_busca_vertices_saida(Grafo * grafo, int vertice, int * cont){
-    return NULL;
+    for (i = 0; i < NUM_VERTICES; i++) {
+        if (grafo->matriz[vertice][i] != -1) {
+            num_vertices++;
+        }
+    }
+
+    int *vertices = malloc(sizeof(int) * num_vertices);
+    int num_vertice = 0;
+
+    for (i = 0; i < NUM_VERTICES; i++) {
+        if (grafo->matriz[vertice][i] != -1) {
+            vertices[num_vertice] = i;
+            num_vertice++;
+        }
+    }
+
+    *cont = num_vertices;
+    return vertices;
 }
 
 int * grafo_busca_vertices_entrada(Grafo * grafo, int vertice, int * cont){

@@ -3,7 +3,6 @@
 #include "grafo.h"
 
 void imprime_tab (Grafo * grafo, int vertice);
-void encontra_mais_popular(Grafo * grafo);
 void imprime_tab_aux(Grafo *grafo, int v1, int v2, int prof, int tab);
 
 
@@ -41,8 +40,37 @@ void imprime_tab (Grafo * grafo, int vertice)
     imprime_tab_aux(grafo, vertice, -1, 0, 0);    
 }
 
+void encontra_mais_popular(Grafo *grafo)
+{
+    if (grafo == NULL){
+        return;
+    }
 
-void encontra_mais_popular(Grafo * grafo){
+    int qtd = grafo_qtd_vertices(grafo);
+    int mais_popular = -1;
+    int maior_popularidade = 0;
+
+    for (int v = 0; v < qtd; v++){
+        int cont = 0;
+        int *entradas = grafo_busca_vertices_entrada(grafo, v, &cont);
+
+        int popularidade = 0;
+
+        for (int i = 0; i < cont; i++){
+            popularidade += grafo_busca_aresta(grafo, entradas[i], v);
+        }
+
+        free(entradas);
+
+        if (mais_popular == -1 || popularidade > maior_popularidade){
+            maior_popularidade = popularidade;
+            mais_popular = v;
+        }
+    }
+
+    if (mais_popular != -1){
+        printf("Pessoa mais popular: vertice %d com %d pontos\n", mais_popular, maior_popularidade);
+    }
 }
 
 

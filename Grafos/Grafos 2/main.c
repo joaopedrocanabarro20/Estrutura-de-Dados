@@ -38,6 +38,7 @@ void imprime_tab_ (Grafo * grafo, Vertice * vertice1, Vertice * vertice2, int pr
    tab-=1;
 }
 
+
 void encontra_mais_popular(Grafo * grafo){
 
     int indice_vertice;
@@ -66,8 +67,28 @@ void encontra_mais_popular(Grafo * grafo){
 }
 
 
-int encontra_ligacao(Grafo * grafo, Vertice * vertice_origem, Vertice * vertice_destino){
-     return 0;
+int encontra_ligacao(Grafo *grafo, Vertice *vertice_origem, Vertice *vertice_destino)
+{
+    if (grafo == NULL ||
+        vertice_origem == NULL ||
+        vertice_destino == NULL) {
+        return 0;
+    }
+
+    int qtd = 0;
+
+    Vertice **saidas =
+        grafo_busca_vertices_saida(grafo, vertice_origem, &qtd);
+
+    for (int i = 0; i < qtd; i++) {
+        if (saidas[i] == vertice_destino) {
+            free(saidas);
+            return 1;
+        }
+    }
+
+    free(saidas);
+    return 0;
 }
 
 

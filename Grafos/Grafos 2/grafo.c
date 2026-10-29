@@ -39,24 +39,24 @@ Grafo *grafo_cria(int num_vertices_max)
 
     grafo->vertices = malloc(sizeof(Vertice *) * num_vertices_max);
 
-    if (grafo->vertices == NULL) {
+    if (grafo->vertices == NULL){
         free(grafo);
         return NULL;
     }
 
     grafo->matriz = malloc(sizeof(int *) * num_vertices_max);
 
-    if (grafo->matriz == NULL) {
+    if (grafo->matriz == NULL){
         free(grafo->vertices);
         free(grafo);
         return NULL;
     }
 
-    for (int i = 0; i < num_vertices_max; i++) {
+    for(int i = 0; i < num_vertices_max; i++){
         grafo->matriz[i] = malloc(sizeof(int) * num_vertices_max);
 
-        if (grafo->matriz[i] == NULL) {
-            for (int k = 0; k < i; k++) {
+        if(grafo->matriz[i] == NULL){
+            for (int k = 0; k < i; k++){
                 free(grafo->matriz[k]);
             }
 
@@ -66,7 +66,7 @@ Grafo *grafo_cria(int num_vertices_max)
             return NULL;
         }
 
-        for (int j = 0; j < num_vertices_max; j++) {
+        for(int j = 0; j < num_vertices_max; j++){
             grafo->matriz[i][j] = -1;
         }
     }
